@@ -26,4 +26,9 @@
         </property>
     </bean>
 
+    <bean id="ThreadExecutor"
+          class="com.xz.drip.service.Thread.ThreadExecutorFactory">
+        <property name="poolSize" value="20"/>
+    </bean>
+
 </beans>
