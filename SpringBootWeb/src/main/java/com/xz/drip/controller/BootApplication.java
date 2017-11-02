@@ -9,9 +9,9 @@ import org.springframework.context.annotation.PropertySource;
  * Created by MABIAO on 2017/10/25.
  */
 
-@SpringBootApplication(scanBasePackages = {"dao"})
+@SpringBootApplication
 @ImportResource("classpath*:spring/applicationContext.xml")
-@PropertySource("classpath:env.properties")
+@PropertySource("classpath:env/app.properties")
 public class BootApplication {
 
     public static void main(String[] args) throws Exception {
