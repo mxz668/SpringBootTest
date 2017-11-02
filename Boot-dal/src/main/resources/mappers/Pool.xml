@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xz.drip.dao.PoolDao" >
+  <resultMap id="BaseResultMap" type="com.xz.drip.entity.Pool" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pool_code" property="poolCode" jdbcType="VARCHAR" />
+    <result column="pool_name" property="poolName" jdbcType="VARCHAR" />
+    <result column="pool_type" property="poolType" jdbcType="TINYINT" />
+    <result column="limit_amount" property="limitAmount" jdbcType="DECIMAL" />
+    <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="stock_amount" property="stockAmount" jdbcType="DECIMAL" />
+    <result column="frozen_amount" property="frozenAmount" jdbcType="DECIMAL" />
+    <result column="sale_amount" property="saleAmount" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="load_switch_status" property="loadSwitchStatus" jdbcType="TINYINT" />
+    <result column="finance_subject_id" property="financeSubjectId" jdbcType="BIGINT" />
+    <result column="finance_subject_code" property="financeSubjectCode" jdbcType="VARCHAR" />
+    <result column="trustee_id" property="trusteeId" jdbcType="BIGINT" />
+    <result column="trustee_code" property="trusteeCode" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+      <result column="pool_desc" property="poolDesc" jdbcType="LONGVARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, pool_code, pool_name, pool_type, limit_amount, total_amount, stock_amount, frozen_amount, 
+    sale_amount, status, load_switch_status, finance_subject_id, finance_subject_code, 
+    trustee_id, trustee_code, version, pool_desc,create_time, create_by, modify_time, modify_by
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+
+    from ams_pool
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ams_pool
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xz.drip.entity.Pool" >
+    insert into ams_pool (id, pool_code, pool_name, 
+      pool_type, limit_amount, total_amount, 
+      stock_amount, frozen_amount, sale_amount, 
+      status, load_switch_status, finance_subject_id, 
+      finance_subject_code, trustee_id, trustee_code, 
+      version, create_time, create_by, 
+      modify_time, modify_by, pool_desc
+      )
+    values (#{id,jdbcType=BIGINT}, #{poolCode,jdbcType=VARCHAR}, #{poolName,jdbcType=VARCHAR}, 
+      #{poolType,jdbcType=TINYINT}, #{limitAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL}, 
+      #{stockAmount,jdbcType=DECIMAL}, #{frozenAmount,jdbcType=DECIMAL}, #{saleAmount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=TINYINT}, #{loadSwitchStatus,jdbcType=TINYINT}, #{financeSubjectId,jdbcType=BIGINT}, 
+      #{financeSubjectCode,jdbcType=VARCHAR}, #{trusteeId,jdbcType=BIGINT}, #{trusteeCode,jdbcType=VARCHAR}, 
+      #{version,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{poolDesc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xz.drip.entity.Pool" >
+    insert into ams_pool
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="poolCode != null" >
+        pool_code,
+      </if>
+      <if test="poolName != null" >
+        pool_name,
+      </if>
+      <if test="poolType != null" >
+        pool_type,
+      </if>
+      <if test="limitAmount != null" >
+        limit_amount,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="stockAmount != null" >
+        stock_amount,
+      </if>
+      <if test="frozenAmount != null" >
+        frozen_amount,
+      </if>
+      <if test="saleAmount != null" >
+        sale_amount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="loadSwitchStatus != null" >
+        load_switch_status,
+      </if>
+      <if test="financeSubjectId != null" >
+        finance_subject_id,
+      </if>
+      <if test="financeSubjectCode != null" >
+        finance_subject_code,
+      </if>
+      <if test="trusteeId != null" >
+        trustee_id,
+      </if>
+      <if test="trusteeCode != null" >
+        trustee_code,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="modifyBy != null" >
+        modify_by,
+      </if>
+      <if test="poolDesc != null" >
+        pool_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="poolCode != null" >
+        #{poolCode,jdbcType=VARCHAR},
+      </if>
+      <if test="poolName != null" >
+        #{poolName,jdbcType=VARCHAR},
+      </if>
+      <if test="poolType != null" >
+        #{poolType,jdbcType=TINYINT},
+      </if>
+      <if test="limitAmount != null" >
+        #{limitAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="stockAmount != null" >
+        #{stockAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null" >
+        #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="saleAmount != null" >
+        #{saleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="loadSwitchStatus != null" >
+        #{loadSwitchStatus,jdbcType=TINYINT},
+      </if>
+      <if test="financeSubjectId != null" >
+        #{financeSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="financeSubjectCode != null" >
+        #{financeSubjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trusteeId != null" >
+        #{trusteeId,jdbcType=BIGINT},
+      </if>
+      <if test="trusteeCode != null" >
+        #{trusteeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="poolDesc != null" >
+        #{poolDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.drip.entity.Pool" >
+    update ams_pool
+    <set >
+      <if test="poolCode != null" >
+        pool_code = #{poolCode,jdbcType=VARCHAR},
+      </if>
+      <if test="poolName != null" >
+        pool_name = #{poolName,jdbcType=VARCHAR},
+      </if>
+      <if test="poolType != null" >
+        pool_type = #{poolType,jdbcType=TINYINT},
+      </if>
+      <if test="limitAmount != null" >
+        limit_amount = #{limitAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="stockAmount != null" >
+        stock_amount = #{stockAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null" >
+        frozen_amount = #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="saleAmount != null" >
+        sale_amount = #{saleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="loadSwitchStatus != null" >
+        load_switch_status = #{loadSwitchStatus,jdbcType=TINYINT},
+      </if>
+      <if test="financeSubjectId != null" >
+        finance_subject_id = #{financeSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="financeSubjectCode != null" >
+        finance_subject_code = #{financeSubjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trusteeId != null" >
+        trustee_id = #{trusteeId,jdbcType=BIGINT},
+      </if>
+      <if test="trusteeCode != null" >
+        trustee_code = #{trusteeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        modify_by = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="poolDesc != null" >
+        pool_desc = #{poolDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.xz.drip.entity.Pool" >
+    update ams_pool
+    set pool_code = #{poolCode,jdbcType=VARCHAR},
+      pool_name = #{poolName,jdbcType=VARCHAR},
+      pool_type = #{poolType,jdbcType=TINYINT},
+      limit_amount = #{limitAmount,jdbcType=DECIMAL},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      stock_amount = #{stockAmount,jdbcType=DECIMAL},
+      frozen_amount = #{frozenAmount,jdbcType=DECIMAL},
+      sale_amount = #{saleAmount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      load_switch_status = #{loadSwitchStatus,jdbcType=TINYINT},
+      finance_subject_id = #{financeSubjectId,jdbcType=BIGINT},
+      finance_subject_code = #{financeSubjectCode,jdbcType=VARCHAR},
+      trustee_id = #{trusteeId,jdbcType=BIGINT},
+      trustee_code = #{trusteeCode,jdbcType=VARCHAR},
+      version = #{version,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      modify_by = #{modifyBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
