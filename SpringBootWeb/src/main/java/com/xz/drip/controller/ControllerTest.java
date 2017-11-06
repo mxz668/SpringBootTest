@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
@@ -34,34 +35,36 @@ public class ControllerTest {
         return testService.home();
     }
 
-    @RequestMapping(value = "/insertBySingleThread",method = RequestMethod.POST)
+    @RequestMapping(value = "/insertBySingleThread", method = RequestMethod.POST)
     String insertBySingleThread(@RequestBody PoolVo poolVo) {
         String ret = "su";
         try {
             ret = testService.insertBySingleThread(poolVo);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return ret;
     }
 
-    @RequestMapping(value = "/insertByThreads",method = RequestMethod.POST)
+    @RequestMapping(value = "/insertByThreads", method = RequestMethod.POST)
     String insertByThreads(@RequestBody final PoolVo poolVo) {
-        String ret = "su";
+        String ret = "failed";
         try {
-            executor.submit(new Callable<Integer>() {
-                public Integer call() {
-                    try{
-                        testService.insertBySingleThread(poolVo);
-                    }catch (Exception e){
+            Future<String> ft = executor.submit(new Callable<String>() {
+                public String call() {
+                    String res = "failed";
+                    try {
+                        res = testService.insertBySingleThread(poolVo);
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    return 1;
+                    return res;
                 }
             });
 
-        }catch (Exception e){
+            ret = ft.get();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

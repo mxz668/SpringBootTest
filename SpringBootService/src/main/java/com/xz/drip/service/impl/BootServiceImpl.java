@@ -7,6 +7,7 @@ import com.xz.drip.service.util.BeanUtils;
 import com.xz.drip.service.vo.PoolVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by MABIAO on 2017/10/26.
@@ -24,9 +25,10 @@ public class BootServiceImpl implements BootService {
     }
 
     @Override
-    public String insertBySingleThread(PoolVo poolVo) throws Exception{
+    @Transactional
+    public synchronized String insertBySingleThread(PoolVo poolVo) throws Exception{
         Pool pool = BeanUtils.copyAs(poolVo,Pool.class);
-        poolDao.insert(pool);
+        poolDao.insertSelective(pool);
         return "success";
     }
 }
