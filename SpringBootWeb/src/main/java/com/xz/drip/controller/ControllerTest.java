@@ -1,7 +1,6 @@
 package com.xz.drip.controller;
 
 import com.xz.drip.service.BootService;
-import com.xz.drip.service.Thread.ThreadExecutorFactory;
 import com.xz.drip.service.vo.PoolVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,7 +31,7 @@ public class ControllerTest {
 
     @RequestMapping("/")
     String home() {
-        return testService.home();
+        return "forward:/index.html";
     }
 
     @RequestMapping(value = "/insertBySingleThread", method = RequestMethod.POST)
