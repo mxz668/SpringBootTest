@@ -9,7 +9,7 @@
 
 
     <import resource="classpath*:spring/applicationContext-*.xml"/>
-    <import resource="spring-mybatis.xml"/>
+    <!--<import resource="spring-mybatis.xml"/>-->
 
     <!--开启注解功能 -->
     <context:annotation-config/>

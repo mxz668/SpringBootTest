@@ -15,20 +15,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BootServiceImpl implements BootService {
 
-    @Autowired
-    private PoolDao poolDao;
+//    @Autowired
+//    private PoolDao poolDao;
 
     @Override
     public String home() {
-        Pool pool = poolDao.selectByPrimaryKey(12l);
+//        Pool pool = poolDao.selectByPrimaryKey(12l);
         return "haha";
     }
 
     @Override
     @Transactional
     public synchronized String insertBySingleThread(PoolVo poolVo) throws Exception{
-        Pool pool = BeanUtils.copyAs(poolVo,Pool.class);
-        poolDao.insertSelective(pool);
+//        Pool pool = BeanUtils.copyAs(poolVo,Pool.class);
+//        poolDao.insertSelective(pool);
         return "success";
     }
 }
